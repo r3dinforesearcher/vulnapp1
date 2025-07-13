@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Git & Docker Learning Guide</title>
+  <style>
+    body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #1e1e2f; color: #f1f1f1; }
+    header { background: #fbbf24; color: #000; padding: 20px; text-align: center; font-size: 1.5rem; }
+    nav { background: #111; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; padding: 10px; position: sticky; top: 0; z-index: 100; }
+    nav a { color: #fbbf24; text-decoration: none; font-weight: bold; }
+    section { padding: 40px 20px; max-width: 1000px; margin: auto; }
+    h2 { color: #facc15; border-bottom: 2px solid #facc15; padding-bottom: 10px; }
+    .cmd { background: #2d2d44; padding: 15px; border-radius: 6px; position: relative; margin: 15px 0; font-family: monospace; white-space: pre-wrap; }
+    .copy-btn { position: absolute; top: 10px; right: 10px; background: #10b981; border: none; color: white; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
+    .copy-btn:hover { background: #059669; }
+    code { color: #93c5fd; }
+    .explanation { margin-top: 5px; font-size: 0.9rem; color: #cbd5e1; }
+    ul { line-height: 1.6; }
+    .project-step { margin: 10px 0; }
+  </style>
+</head>
+<body>
+
+<header>🚀 Git & Docker Learning Manual</header>
+
+<nav>
+  <a href="#git-basics">Git</a>
+  <a href="#docker-basics">Docker</a>
+  <a href="#networking">Networking</a>
+  <a href="#security">Security</a>
+  <a href="#deployment">Deployment</a>
+  <a href="#project1">Project 1</a>
+  <a href="#project2">Project 2</a>
+</nav>
+
+<section id="git-basics">
+  <h2>Git Basics</h2>
+
+  <div class="cmd">
+    git init
+    <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    <div class="explanation">Initializes a new Git repository in the current folder.</div>
+  </div>
+
+  <div class="cmd">
+    git add .
+    <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    <div class="explanation">Stages all changes for commit.</div>
+  </div>
+
+  <div class="cmd">
+    git commit -m "Initial commit"
+    <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    <div class="explanation">Commits staged files with a message.</div>
+  </div>
+
+  <div class="cmd">
+    git remote add origin https://github.com/username/repo.git
+    <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    <div class="explanation">Links local repository to remote GitHub repo.</div>
+  </div>
+
+  <div class="cmd">
+    git push -u origin main
+    <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    <div class="explanation">Pushes commits to GitHub on the main branch.</div>
+  </div>
+</section>
+
+<section id="docker-basics">
+  <h2>Docker Basics</h2>
+
+  <div class="cmd">
+    docker build -t myapp .
+    <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    <div class="explanation">Builds Docker image using Dockerfile in current directory.</div>
+  </div>
+
+  <div class="cmd">
+    docker run -d -p 8080:80 myapp
+    <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    <div class="explanation">Runs container in background and maps port 8080 on host to 80 on container.</div>
+  </div>
+</section>
+
+<section id="networking">
+  <h2>Docker Networking</h2>
+
+  <div class="cmd">
+    docker network create mynetwork
+    <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    <div class="explanation">Creates a custom Docker network.</div>
+  </div>
+
+  <div class="cmd">
+    docker run -d --name web --network mynetwork nginx
+    <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    <div class="explanation">Runs a web server container attached to custom network.</div>
+  </div>
+</section>
+
+<section id="security">
+  <h2>Docker Security</h2>
+
+  <div class="cmd">
+    docker scan myapp
+    <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    <div class="explanation">Scans the Docker image for vulnerabilities.</div>
+  </div>
+
+  <div class="cmd">
+    docker run --read-only --cap-drop=ALL myapp
+    <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    <div class="explanation">Runs container in read-only mode with no additional privileges.</div>
+  </div>
+</section>
+
+<section id="deployment">
+  <h2>Deployment</h2>
+
+  <div class="cmd">
+    docker tag myapp username/myapp:latest
+    <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    <div class="explanation">Tags Docker image for Docker Hub.</div>
+  </div>
+
+  <div class="cmd">
+    docker push username/myapp:latest
+    <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    <div class="explanation">Pushes tagged image to Docker Hub.</div>
+  </div>
+</section>
+
+<section id="project1">
+  <h2>Project 1: Static Website with Git + Docker</h2>
+  <ul>
+    <li class="project-step">Create `index.html` with a simple welcome message.</li>
+    <li class="project-step">Create a `Dockerfile`:
+      <div class="cmd">
+        FROM nginx:alpine<br>
+        COPY . /usr/share/nginx/html
+        <button class="copy-btn" onclick="copyText(this)">Copy</button>
+      </div>
+    </li>
+    <li class="project-step">Build the image and run it:
+      <div class="cmd">
+        docker build -t static-web .<br>
+        docker run -d -p 8080:80 static-web
+        <button class="copy-btn" onclick="copyText(this)">Copy</button>
+      </div>
+    </li>
+    <li class="project-step">Push to GitHub using Git commands shown earlier.</li>
+  </ul>
+</section>
+
+<section id="project2">
+  <h2>Project 2: Node.js App with Git + Docker + Compose</h2>
+  <ul>
+    <li>Create a Node.js `app.js`:</li>
+    <div class="cmd">
+      const http = require('http');<br>
+      http.createServer((req, res) => {<br>
+      &nbsp;&nbsp;res.end("Hello from Node.js!");<br>
+      }).listen(3000);
+      <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    </div>
+
+    <li>Create `Dockerfile`:</li>
+    <div class="cmd">
+      FROM node:alpine<br>
+      COPY . .<br>
+      CMD ["node", "app.js"]
+      <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    </div>
+
+    <li>Create `docker-compose.yml`:</li>
+    <div class="cmd">
+      version: '3'<br>
+      services:<br>
+      &nbsp;&nbsp;web:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;build: .<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;ports:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- "3000:3000"
+      <button class="copy-btn" onclick="copyText(this)">Copy</button>
+    </div>
+
+    <li>Build and run:
+      <div class="cmd">
+        docker-compose up --build
+        <button class="copy-btn" onclick="copyText(this)">Copy</button>
+      </div>
+    </li>
+
+    <li>Access app at <code>http://localhost:3000</code></li>
+  </ul>
+</section>
+
+<script>
+  function copyText(btn) {
+    const text = btn.parentElement.textContent.replace("Copy", "").trim();
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = "Copied!";
+      setTimeout(() => btn.textContent = "Copy", 2000);
+    });
+  }
+</script>
+
+</body>
+</html>
+
